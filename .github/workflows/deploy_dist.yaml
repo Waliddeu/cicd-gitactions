@@ -7,7 +7,7 @@ on:
       - 'feature/**'
     paths-ignore:
       - README.md
-      - '.github/workflow/*'
+      - '.github/workflows/*'
   workflow_dispatch:
 
 jobs:
