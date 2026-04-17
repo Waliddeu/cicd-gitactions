@@ -43,9 +43,9 @@ jobs:
   build: 
     needs: test
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: '2 Github actions/final code'
+    # defaults:
+    #   run:
+    #     working-directory: '2 Github actions/final code'
     steps:
       - name: Get Code
         uses: actions/checkout@v4 #Clone repository
@@ -78,9 +78,9 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: '2 Github actions/final code'
+    # defaults:
+    #   run:
+    #     working-directory: '2 Github actions/final code'
     steps:
       - name: Deploy Dist
         run: echo "Deployment completed"
