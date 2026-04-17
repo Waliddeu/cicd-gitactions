@@ -17,7 +17,7 @@ jobs:
         #   git clone https://github.com/${{github.repository}}.git myfiles
         #   cd myfiles && ls
       - name: setup node js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
       
@@ -51,7 +51,7 @@ jobs:
         uses: actions/checkout@v4 #Clone repository
 
       - name: setup node js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
       
@@ -73,7 +73,7 @@ jobs:
         run: npm run build
       
       - name: Upload Dist Artifact
-        uses: action/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: dist-files
           path: dist
@@ -89,7 +89,7 @@ jobs:
     #     working-directory: '2 Github actions/final code'
     steps:
       - name: Download Dist Artifact
-        uses: action/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: dist-files
           path: dist 
