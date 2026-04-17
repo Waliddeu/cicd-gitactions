@@ -4,9 +4,9 @@ function App() {
 
   return (
     <>
-      <h1>CI/CD using Github Actions</h1>
-      <h2>For beginners v3</h2>
-      <h2>With 3 projects</h2>
+      <h1>CI/CD for Walid</h1>
+      <h2>For fun</h2>
+      <h2>This is as a revision as preparing for DevOps</h2>
     </>
   )
 }
