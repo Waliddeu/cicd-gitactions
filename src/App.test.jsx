@@ -5,7 +5,7 @@ import App from './App';
 
 test('renders Github Actions heading', () => {
   render(<App />);
-  const headingElement = screen.getByText(/Github Actions/i);
+  const headingElement = screen.getByText(/Walid/i);
   expect(headingElement).toBeInTheDocument();
 });
 
