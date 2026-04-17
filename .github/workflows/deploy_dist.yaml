@@ -1,5 +1,14 @@
 name: Deploy Dist folder
-on: [push, workflow_dispatch]
+# on: [push, workflow_dispatch]
+on: 
+  push: 
+    branches:
+      - main
+      - 'feature/**'
+    paths-ignore:
+      - README.md
+      - '.github/workflow/*'
+  workflow_dispatch:
 
 jobs:
   test:
@@ -40,6 +49,7 @@ jobs:
       
       - name: Complete job
         run: echo "Test job completed."
+
   build: 
     needs: test
     runs-on: ubuntu-latest
