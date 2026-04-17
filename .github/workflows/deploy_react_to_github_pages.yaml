@@ -1,0 +1,75 @@
+name: Deploy React to Github Pages
+on: 
+  push: 
+    branches:
+      - main
+      - 'feature/**'
+    paths-ignore:
+      - README.md
+      - '.github/workflows/*'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
+
+      - name: setup node js
+        uses: ./.github/actions/setupnode
+        with: 
+            node-version: 20
+      - name: Run Tests
+        run: npm run test
+      
+      - name: Complete job
+        run: echo "Test job completed."
+
+  build: 
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4 #Clone repository
+
+      - name: setup node js
+        uses: ./.github/actions/setupnode
+      - name: Build Project
+        run: npm run build
+      
+      - name: Upload Dist Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: github-pages
+          path: dist
+      
+      - name: Complete job
+        run: echo "Test job completed."
+  
+  # Deploy job
+  deploy:
+    runs-on: ubuntu-latest
+    # Add a dependency to the build job
+    needs: build
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Specify runner + deployment step
+    
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # or specific "vX.X.X" version tag for this action
+        with:
+          token: 	${{ secrets.GITHUB_TOKEN }}

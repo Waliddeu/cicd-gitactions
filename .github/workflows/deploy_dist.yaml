@@ -3,11 +3,11 @@ name: Deploy Dist folder
 on: 
   push: 
     branches:
-      - main
-      - 'feature/**'
-    paths-ignore:
-      - README.md
-      - '.github/workflows/*'
+    #   - main
+    #   - 'feature/**'
+    # paths-ignore:
+    #   - README.md
+    #   - '.github/workflows/*'
   workflow_dispatch:
 
 jobs:
@@ -27,7 +27,8 @@ jobs:
         #   cd myfiles && ls
       - name: setup node js
         uses: ./.github/actions/setupnode
-      
+        with: 
+            node-version: 20
       - name: Run Tests
         run: npm run test
       
@@ -46,8 +47,6 @@ jobs:
 
       - name: setup node js
         uses: ./.github/actions/setupnode
-        with: 
-          node-version: 20
       - name: Build Project
         run: npm run build
       
